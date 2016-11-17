@@ -1,8 +1,57 @@
+/*html, body {height:100%; min-height: 100%; margin: 0; padding: 0;}*/
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+
+section {
+	text-align: center;
+	background:#333;
+	color:#fff;
+	width: 100%;
+    height:100vh;
+    min-height:600px; /*Lame bodge for non-css3*/
+	display: table;
+}
+
+section .inner {
+	vertical-align: middle;
+	display: table-cell;
+	padding:1em;
+}
+
+section.intro {
+	background: #fff;
+	color:#333;
+}
+
+section.intro,
+section.feed {
+	background: #fff;
+	color:#333;
+}
+
+
+
+.viewpoint h3 {
+	min-height: 3em;
+}
+
+
+
+.feed-story {
+	margin-bottom: 8px;
+}
+
+
+@media only screen and (min-width: 769px) {
+	.feed-stories {
+		max-width: 600px;
+		margin:0 auto;
+	}
 }

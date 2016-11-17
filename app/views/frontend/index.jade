@@ -1,5 +1,69 @@
 extends ../layouts/frontend
 
 block content
-  h1= title
-  p Welcome to #{title}
+	div(ng-controller="FrontendController")
+		section.intro.full-height-panel
+			div.inner
+				h1 Opposite Day
+				p What is your evil twin reading on Facebook?
+				md-button.md-raised.md-primary(
+					ng-click="scrollToViewpoints()"
+				) Find out now
+
+
+
+		section.viewpoints#viewpoints
+			div.inner
+				h2 Agree or disagree?
+				div(
+					ng-repeat="(i, viewpoint) in viewpoints"
+					ng-show=" currentViewPoint == i "
+					)
+					div.viewpoint
+						h3 {{ viewpoint.text }}
+					div.controls
+						md-button.md-raised.md-primary(
+							ng-click="saveViewpointPosition(i, true)"
+						) Agree
+						md-button.md-raised.md-warn(
+							ng-click="saveViewpointPosition(i, false)"
+						) Disagree
+
+				div.viewpoints-complete(
+					ng-show=" currentViewPoint == viewpoints.length "
+				)
+					md-button.md-raised.md-primary.md-block(
+						ng-click="scrollToFeed()"
+					) See my evil twin's feed
+
+				
+
+		section.feed#feed
+			div.inner(ng-if="feed.received")
+				h2 Here are some views opposite to your own
+				div.feed-stories#feed-stories
+					div.feed-story(ng-repeat="story in feed.stories")
+						iframe(
+							src="{{story.url}}"
+							width="{{feed.embedOptions.width}}"
+							height="{{feed.embedOptions.height}}"
+							style="border:none;overflow:hidden"
+							scrolling="no"
+							frameborder="0"
+							allowTransparency="true"
+						)
+
+
+		section.sign-up#sign-up
+			div.inner(ng-if="feed.received")
+				h2	Want more?
+				
+				p Some blurb about the value of understanding other people's viewpoints
+				
+				p Once a week, we will keep you up to date with your opposite's point of view. You will receive a notification on Facebook with a link to the most recent stories. 
+
+				div.cta
+					md-button.md-raised.md-primary Sign in with Facebook
+
+
+
