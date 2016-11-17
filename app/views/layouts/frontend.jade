@@ -12,7 +12,7 @@ html(class='no-js')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
 
-    title
+    title Alert Opposing Feed App
 
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
@@ -26,12 +26,12 @@ html(class='no-js')
 
     //- Custom Directives
 
-    link(rel='stylesheet', href='/stylesheets/main.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
 
 
     script(src='/javascripts/vendor/modernizr-2.8.3.min.js')
 
-  body(ng-app="BubblesPublic", ng-cloak)
+  body(ng-app="OpposingFeedPublic", ng-cloak)
     //if lt IE 7
       p.browsehappy You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
 
@@ -45,12 +45,12 @@ html(class='no-js')
     script(src='/components/angular-aria/angular-aria.js')
       
 
-    script(src='/javascripts/apps/public.js')
+    script(src='/javascripts/apps/frontend.js')
 
     //- Services
 
     //- controllers
-    script(src="/javascripts/controllers/PublicLoginController.js")
+    script(src="/javascripts/controllers/FrontendController.js")
 
     //- Directives
 
