@@ -1,4 +1,4 @@
-app.controller('FrontendController', function ($scope, $document, $mdMedia) {
+app.controller('FrontendController', function ($scope, $document, $mdMedia, FeedService) {
 
 
 
@@ -9,17 +9,7 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia) {
 			height: $mdMedia('(min-width: 769px)') ? 300 : 360
 		},
 		received: false,
-		stories: [
-			{
-				url: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F20531316728%2Fposts%2F10154009990506729%2F&show_text=true&appId=1716003962060301"
-			},
-			{
-				url: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F20531316728%2Fposts%2F10154009990506729%2F&show_text=true&appId=1716003962060301"
-			},
-			{
-				url: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F20531316728%2Fposts%2F10154009990506729%2F&show_text=true&appId=1716003962060301"
-			}
-		]
+		stories: null
 	}
 
 	$scope.viewpoints = [
@@ -53,8 +43,14 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia) {
 	}
 
 	$scope.scrollToFeed = function() {
-		$scope.feed.received = true;
-		scrollTo('feed')
+		FeedService.generate(null)
+			.then(function(stories){
+				$scope.feed.stories = stories
+				scrollTo('feed')
+				$scope.feed.received = true;
+			})
+		
+		
 	}
 
 
