@@ -6,6 +6,7 @@ block content
 			div.inner
 				h1 Opposite Day
 				p What is your evil twin reading on Facebook?
+				pre loadingComplete: {{loadingComplete}}
 				md-button.md-raised.md-primary(
 					ng-click="scrollToViewpoints()"
 				) Find out now
@@ -16,26 +17,35 @@ block content
 			div.inner
 				h2 Agree or disagree?
 				div(
-					ng-repeat="(i, viewpoint) in viewpoints"
-					ng-show=" currentViewPoint == i "
+					ng-repeat="(i, viewpoint) in viewpoints.all"
+					ng-show=" currentViewPointIndex == i "
 					)
 					div.viewpoint
-						h3 {{ viewpoint.text }}
+						h3 {{ viewpoint.title }}
 					div.controls
 						md-button.md-raised.md-primary(
-							ng-click="saveViewpointPosition(i, true)"
+							ng-click="saveViewpointPosition(i, viewpoint.id, true)"
 						) Agree
 						md-button.md-raised.md-warn(
-							ng-click="saveViewpointPosition(i, false)"
+							ng-click="saveViewpointPosition(i, viewpoint.id, false)"
 						) Disagree
 
-				div.viewpoints-complete(
-					ng-show=" currentViewPoint == viewpoints.length "
-				)
-					md-button.md-raised.md-primary.md-block(
+				
+
+
+		section#parties.parties
+			div.inner
+				h2 Which UK political party do you most associate yourself with?
+				div(ng-repeat="party in parties.all")
+					md-button(ng-click="selectParty(party)") {{party.name}}
+
+
+		section.feed-loading#feed-loading
+			div.inner
+				pre feed.received: {{feed.received}}
+				md-button.md-raised.md-primary.md-block(
 						ng-click="scrollToFeed()"
 					) See my evil twin's feed
-
 				
 
 		section.feed#feed

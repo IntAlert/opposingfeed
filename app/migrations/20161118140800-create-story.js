@@ -14,6 +14,9 @@ module.exports = {
       url: {
         type: Sequelize.STRING
       },
+      agree: {
+        type: Sequelize.BOOLEAN
+      },
       ViewpointId: {
         type: Sequelize.INTEGER
       },

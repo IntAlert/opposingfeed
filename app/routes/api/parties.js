@@ -10,6 +10,7 @@ router.get('/all', function(req, res, next) {
 
 	// get the even twin feed
 	models.Party.findAll({
+		order: [['name', 'ASC']],
 		attributes: ['id','name']
 	})
 		.then(function(parties){
