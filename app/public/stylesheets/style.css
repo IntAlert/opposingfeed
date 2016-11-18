@@ -30,8 +30,7 @@ section.intro {
 	color:#333;
 }
 
-section.intro,
-section.feed {
+section:nth-child(odd) {
 	background: #fff;
 	color:#333;
 }

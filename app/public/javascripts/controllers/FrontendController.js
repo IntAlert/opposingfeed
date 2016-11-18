@@ -1,7 +1,4 @@
-app.controller('FrontendController', function ($scope, $document, $mdMedia, FeedService) {
-
-
-
+app.controller('FrontendController', function ($scope, $document, $mdMedia, $timeout, ViewpointsService, PartiesService, FeedService) {
 
 	$scope.feed = {
 		embedOptions: {
@@ -12,31 +9,60 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia, Feed
 		stories: null
 	}
 
-	$scope.viewpoints = [
-		{
-			text: "Cheese is great"
-		},
-		{
-			text: "It's Six O'Clock"
-		},
-		{
-			text: "Liam's jeans are baggy"
+	$scope.viewpoints = ViewpointsService
+	$scope.parties = PartiesService
+
+
+
+	$scope.currentViewPointIndex = 0;
+	$scope.responses = {}
+
+	// wait until everything is loaded
+	$scope.loadingComplete = false;
+	$scope.$watch('[viewpoints,parties]', function(){
+		if($scope.viewpoints.all.length && $scope.parties.all.length) {
+			$scope.loadingComplete = true;
 		}
-	];
-
-	$scope.currentViewPoint = 0
+	}, true)
 
 
-	$scope.saveViewpointPosition = function(i, agree) {
-		$scope.currentViewPoint = i + 1
+	$scope.saveViewpointPosition = function(i, id, agree) {
+
+		// save the response locally
+		$scope.responses[id] = {
+			id:id,
+			agree:agree
+		}
+
+		// move on to next viewpoint
+		$scope.currentViewPointIndex = i + 1
+
+		// if finished, move on to parties
+		if ($scope.currentViewPointIndex == $scope.viewpoints.all.length) {
+
+			scrollToParties();
+
+			// reset the viewpoint index once the animation is complete
+			$timeout(function(){$scope.currentViewPointIndex = 0}, 1100);
+		}
+	}
+
+
+	$scope.selectParty = function(party) {
+		$scope.selectedParty = party
+		scrollToFeedLoading()
 	}
 
 
 
 
+	$scope.scrollToParties = function() {
+		scrollTo('parties')
+	}
 
-
-
+	$scope.scrollToFeedLoading = function() {
+		scrollTo('feed-loading')
+	}
 
 	$scope.scrollToViewpoints = function() {
 		scrollTo('viewpoints')

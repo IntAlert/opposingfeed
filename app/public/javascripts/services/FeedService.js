@@ -1,12 +1,12 @@
 app.factory('FeedService', function($http) {
 
   var instance = {
-  	generate: function(viewpoints) {
+  	generate: function(responses) {
 
 	  var url = '/api/feed/generate';
 
 	  var data = {
-	  	viewpoints: viewpoints
+	  	responses: responses
 	  }
 
 	  return $http.post(url, data)
