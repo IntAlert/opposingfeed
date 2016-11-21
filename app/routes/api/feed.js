@@ -9,7 +9,9 @@ router.post('/generate', function(req, res, next) {
 
 
 	var responses = req.body.responses;
+	var party = req.body.party;
 
+	console.log(req.body)
 
 	// // create new user
 	// var userId = 1
@@ -42,7 +44,7 @@ router.post('/generate', function(req, res, next) {
 	// get the even twin feed
 	models.Story.findAll({
 		where: {
-			$or: orConditions
+			// $or: orConditions
 		},
 		attributes: [
 			'id',

@@ -5,7 +5,6 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia, $tim
 			width: $mdMedia('(min-width: 769px)') ? 600 : '100%',
 			height: $mdMedia('(min-width: 769px)') ? 300 : 360
 		},
-		received: false,
 		stories: null
 	}
 
@@ -13,15 +12,42 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia, $tim
 	$scope.parties = PartiesService
 
 
+	// Data state
+	$scope.dataState = {
+		prompts: {loaded:false},
+		feed: {loaded:false}
+	}
 
-	$scope.currentViewPointIndex = 0;
-	$scope.responses = {}
+	// UI state
+	$scope.sections = {
+		intro: {show:true},
+		viewpoints: {
+			show:false,
+			currentIndex:0
+		},
+		parties: {show:false},
+		feedLoading: {show:false},
+		feed: {show:false},
+		signUp: {show:false}
+	}
+
+	// User responses
+	$scope.userData = {
+		responses: {},
+		party: null
+	}
+
 
 	// wait until everything is loaded
 	$scope.loadingComplete = false;
 	$scope.$watch('[viewpoints,parties]', function(){
 		if($scope.viewpoints.all.length && $scope.parties.all.length) {
-			$scope.loadingComplete = true;
+			$timeout(function(){
+				// for effect!
+				$scope.dataState.prompts.loaded = true;	
+				$scope.sections.viewpoints.show = true;
+			}, 2000)
+			
 		}
 	}, true)
 
@@ -29,32 +55,55 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia, $tim
 	$scope.saveViewpointPosition = function(i, id, agree) {
 
 		// save the response locally
-		$scope.responses[id] = {
+		$scope.userData.responses[id] = {
 			id:id,
 			agree:agree
 		}
 
 		// move on to next viewpoint
-		$scope.currentViewPointIndex = i + 1
+		$scope.sections.viewpoints.currentIndex = i + 1
 
 		// if finished, move on to parties
-		if ($scope.currentViewPointIndex == $scope.viewpoints.all.length) {
+		if ($scope.sections.viewpoints.currentIndex == $scope.viewpoints.all.length) {
 
-			scrollToParties();
+			$scope.sections.parties.show = true;
+			$timeout($scope.scrollToParties)
 
 			// reset the viewpoint index once the animation is complete
-			$timeout(function(){$scope.currentViewPointIndex = 0}, 1100);
+			$timeout(function(){$scope.sections.viewpoints.currentIndex = 0}, 1100);
 		}
 	}
 
 
 	$scope.selectParty = function(party) {
-		$scope.selectedParty = party
-		scrollToFeedLoading()
+		$scope.userData.party = party
+		$scope.sections.feedLoading.show = true;
+
+		FeedService.generate($scope.userData)
+			.then(function(stories){
+				$scope.feed.stories = stories;
+				$scope.sections.feed.show = true;
+				$scope.sections.signUp.show = true;
+			})
+			.then(function(){
+				// give the feed time to load
+				$timeout(function(){
+					$scope.dataState.feed.loaded = true;
+					$scope.scrollToFeed();
+				}, 4500)
+			})
+
+		// Show waiting
+		$timeout($scope.scrollToFeedLoading, 100)
 	}
 
 
 
+
+	// SCROLLING FUNCTIONS
+	$scope.scrollToViewpoints = function() {
+		scrollTo('viewpoints')
+	}
 
 	$scope.scrollToParties = function() {
 		scrollTo('parties')
@@ -64,21 +113,9 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia, $tim
 		scrollTo('feed-loading')
 	}
 
-	$scope.scrollToViewpoints = function() {
-		scrollTo('viewpoints')
-	}
-
 	$scope.scrollToFeed = function() {
-		FeedService.generate(null)
-			.then(function(stories){
-				$scope.feed.stories = stories
-				scrollTo('feed')
-				$scope.feed.received = true;
-			})
-		
-		
+		scrollTo('feed')
 	}
-
 
 	var scrollTo = function(elementId){
 		var section = angular.element(document.getElementById(elementId));

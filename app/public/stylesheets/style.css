@@ -25,14 +25,14 @@ section .inner {
 	padding:1em;
 }
 
-section.intro {
+section:nth-child(odd) {
 	background: #fff;
 	color:#333;
 }
 
-section:nth-child(odd) {
-	background: #fff;
-	color:#333;
+.loading {
+	width:80px;
+	margin:30px auto;
 }
 
 

@@ -2,23 +2,35 @@ extends ../layouts/frontend
 
 block content
 	div(ng-controller="FrontendController")
-		section.intro.full-height-panel
+
+
+
+		section.intro.full-height-panel(ng-show="sections.intro.show")
 			div.inner
 				h1 Opposite Day
+				
 				p What is your evil twin reading on Facebook?
-				pre loadingComplete: {{loadingComplete}}
-				md-button.md-raised.md-primary(
-					ng-click="scrollToViewpoints()"
-				) Find out now
+				
+				div.loading(ng-hide="dataState.prompts.loaded")
+					md-progress-circular.md-accent.md-hue-1(md-diameter="30")
+				
+				div.cta(ng-show="dataState.prompts.loaded")
+					md-button.md-raised.md-primary(
+						ng-click="scrollToViewpoints()"
+					) Find out now
 
 
 
-		section.viewpoints#viewpoints
+		section.viewpoints#viewpoints(ng-show="sections.viewpoints.show")
 			div.inner
-				h2 Agree or disagree?
+				
+				h2(
+					ng-hide="sections.viewpoints.currentIndex == viewpoints.all.length"
+					) Agree or disagree?
+
 				div(
 					ng-repeat="(i, viewpoint) in viewpoints.all"
-					ng-show=" currentViewPointIndex == i "
+					ng-show=" sections.viewpoints.currentIndex == i "
 					)
 					div.viewpoint
 						h3 {{ viewpoint.title }}
@@ -33,39 +45,45 @@ block content
 				
 
 
-		section#parties.parties
+		section#parties.parties(ng-show="sections.parties.show")
 			div.inner
 				h2 Which UK political party do you most associate yourself with?
 				div(ng-repeat="party in parties.all")
 					md-button(ng-click="selectParty(party)") {{party.name}}
 
 
-		section.feed-loading#feed-loading
+		section.feed-loading#feed-loading(ng-show="sections.feedLoading.show")
 			div.inner
-				pre feed.received: {{feed.received}}
-				md-button.md-raised.md-primary.md-block(
-						ng-click="scrollToFeed()"
-					) See my evil twin's feed
+				div.loading(ng-hide="dataState.feed.loaded")
+					md-progress-circular.md-accent.md-hue-1(md-diameter="80")
+
+					p Loading your evil twin's feed
+					
+
+				//- //- md-button.md-raised.md-primary.md-block(
+				//- 		ng-show="dataState.feed.loaded"
+				//- 		ng-click="scrollToFeed()"
+				//- 	) See my evil twin's feed
 				
 
-		section.feed#feed
-			div.inner(ng-if="feed.received")
+		section.feed#feed(ng-show="sections.feed.show")
+			div.inner(ng-if="dataState.feed.loaded")
 				h2 Here are some views opposite to your own
 				div.feed-stories#feed-stories
 					div.feed-story(ng-repeat="story in feed.stories")
-						iframe(
-							src="{{story.url}}"
-							width="{{feed.embedOptions.width}}"
-							height="{{feed.embedOptions.height}}"
-							style="border:none;overflow:hidden"
-							scrolling="no"
-							frameborder="0"
-							allowTransparency="true"
+
+
+						fb-post-preview(
+							width="500"
+							story="story"
 						)
 
+						//- fb-post-preview(
+						//- 	data-href="{{story.url}}"
+						//- )
 
-		section.sign-up#sign-up
-			div.inner(ng-if="feed.received")
+		section.sign-up#sign-up(ng-show="sections.signUp.show")
+			div.inner(ng-if="sections.signUp.show")
 				h2	Want more?
 				
 				p Some blurb about the value of understanding other people's viewpoints
