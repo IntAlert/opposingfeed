@@ -13,18 +13,12 @@
     var directive = {
       link: link,
       // template: '<div class="fb-post" data-width="500" data-href="{{href}}"></div>',
-      template: '<div class="fb-post" data-href="{{story.url}}" data-width="{{width}}" data-show-text="true">'+
-                  '<blockquote cite="{{story.url}}" class="fb-xfbml-parse-ignore">' +
-                  'Posted by '+
-                    '<a href="{{story.source_url}}">'+
-                      '{{story.source_name}}'+
-                    '</a>'+
-                    ' on&nbsp;'+
-                    '<a href="{{story.url}}">' + 
-                      'Monday, 21 November 2016'+
-                    '</a>'+
-                  '</blockquote>'+
-                '</div>',
+      template: '<div '+
+        'class="fb-post" '+
+        'data-href="{{story.url}}" '+
+        'data-width="{{width}}" '+
+        'data-show-text="true"> '+
+      '</div>',
       restrict: 'EA',
       scope: {
         story: '=',
