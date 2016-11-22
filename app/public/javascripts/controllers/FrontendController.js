@@ -26,7 +26,10 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia, $tim
 			currentIndex:0
 		},
 		parties: {show:false},
-		feedLoading: {show:false},
+		feedLoading: {
+			show:false,
+			feedReady:false
+		},
 		feed: {show:false},
 		signUp: {show:false}
 	}
@@ -79,6 +82,8 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia, $tim
 		$scope.userData.party = party
 		$scope.sections.feedLoading.show = true;
 
+
+		$scope.dataState.feed.loaded = false;
 		FeedService.generate($scope.userData)
 			.then(function(stories){
 				$scope.feed.stories = stories;
@@ -87,10 +92,10 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia, $tim
 			})
 			.then(function(){
 				// give the feed time to load
+				$scope.dataState.feed.loaded = true;
 				$timeout(function(){
-					$scope.dataState.feed.loaded = true;
 					$scope.scrollToFeed();
-				}, 4500)
+				}, 2000)
 			})
 
 		// Show waiting

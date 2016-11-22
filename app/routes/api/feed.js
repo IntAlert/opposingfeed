@@ -45,13 +45,18 @@ router.post('/generate', function(req, res, next) {
 	// create WHERE conditions as opposite to submitted responses
 	var orConditions = responses.map(function(response){
 		response.agree = !response.agree
-		return response
+		return {
+			ViewpointId: response.id,
+			agree: !response.agree
+		}
 	})
+
+	console.log(orConditions)
 
 	// get the even twin feed
 	var viewpointStoriesPromise = models.Story.findAll({
 		where: {
-			// $or: orConditions
+			$or: orConditions
 		},
 		attributes: [
 			'id',
