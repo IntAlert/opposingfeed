@@ -3,7 +3,7 @@ extends ../layouts/admin
 block content
 	div(ng-controller="AdminController")
 
-		section(layout="row")
+		section(layout="row", flex)
 			
 			include index/sidenav_left
 
@@ -11,6 +11,5 @@ block content
 
 				div(ng-show="selectedViewpoint")
 					include index/viewpoint
-
 
 			include index/sidenav_right

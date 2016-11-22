@@ -1,0 +1,7 @@
+@media (min-width: 600px) {
+	md-sidenav {
+	    max-width: 450px;
+	    width: 450px;
+	    height:100vh;
+	}
+}
