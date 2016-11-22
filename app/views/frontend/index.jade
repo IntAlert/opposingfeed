@@ -7,9 +7,9 @@ block content
 
 		section.intro.full-height-panel(ng-show="sections.intro.show")
 			div.inner
-				h1 Opposite Day
+				h1 Break out of the bubble
 				
-				p What is your evil twin reading on Facebook?
+				p It is said that on the web, we live in a bubble, closed off from political views different from our own. What is your evil twin reading on Facebook?
 				
 				div.loading(ng-hide="dataState.prompts.loaded")
 					md-progress-circular.md-accent.md-hue-1(md-diameter="30")
@@ -47,7 +47,7 @@ block content
 
 		section#parties.parties(ng-show="sections.parties.show")
 			div.inner
-				h2 Which UK political party do you most associate yourself with?
+				h2 With which UK political party are your views most closely aligned?
 				div(ng-repeat="party in parties.all")
 					md-button(ng-click="selectParty(party)") {{party.name}}
 
@@ -68,7 +68,7 @@ block content
 
 		section.feed#feed(ng-show="sections.feed.show")
 			div.inner(ng-if="dataState.feed.loaded")
-				h2 Here are some views opposite to your own
+				h2 Here's what everyone else is reading...
 				div.feed-stories#feed-stories
 					div.feed-story(ng-repeat="story in feed.stories")
 
