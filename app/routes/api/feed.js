@@ -3,6 +3,8 @@ var router = express.Router();
 var models = require('../../models');
 // var roles = require('../../config/authorisation')
 
+var partyScraper = require('../../lib/partyScraper')
+
 /* GET all friendships. */
 // router.get('/get', roles.can('access admin app'), function(req, res, next) {
 router.post('/generate', function(req, res, next) {
@@ -11,7 +13,12 @@ router.post('/generate', function(req, res, next) {
 	var responses = req.body.responses;
 	var party = req.body.party;
 
-	console.log(req.body)
+
+	var partyStoriesPromise = models.Party.findAll()
+		.then(function(parties){
+			return partyScraper.getOtherPartyStories(parties, party)	
+		})
+	
 
 	// // create new user
 	// var userId = 1
@@ -42,7 +49,7 @@ router.post('/generate', function(req, res, next) {
 	})
 
 	// get the even twin feed
-	models.Story.findAll({
+	var viewpointStoriesPromise = models.Story.findAll({
 		where: {
 			// $or: orConditions
 		},
@@ -59,11 +66,23 @@ router.post('/generate', function(req, res, next) {
 				]
 			}
 		]
-	}).then(function(stories){
-		res.json({
-			stories: stories
-		})
 	})
+
+
+	Promise
+		.all([partyStoriesPromise,viewpointStoriesPromise])
+		.then(function(stories){
+			var partyStories = stories[0]
+			var viewpointStories = stories[1]
+			
+			var combinedStories = []
+			var combinedStories  = viewpointStories.concat(partyStories)
+				.sort(function(){return Math.random() - 0.5})
+			
+			return res.json({
+				stories: combinedStories
+			})	
+		})
 
 
 

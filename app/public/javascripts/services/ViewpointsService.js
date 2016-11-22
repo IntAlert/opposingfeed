@@ -14,7 +14,6 @@ app.factory('ViewpointsService', function($http) {
 	  	})
   }
 
-
   // eager load
   getAll()
 

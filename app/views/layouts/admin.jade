@@ -1,0 +1,90 @@
+doctype html
+//if lt IE 7
+  <html class="no-js lt-ie9 lt-ie8 lt-ie7">
+//if IE 7
+  <html class="no-js lt-ie9 lt-ie8">
+//if IE 8
+  <html class="no-js lt-ie9">
+//[if gt IE 8]><!
+html(class='no-js')
+  //<![endif]
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+
+    title Admin - Opposite Day - International Alert
+
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+
+
+    
+
+    link(rel='stylesheet', href='/stylesheets/normalize.css')
+    link(rel='stylesheet', href='/components/angular-material/angular-material.min.css')
+
+
+    //- Custom Directives
+
+    link(rel='stylesheet', href='/stylesheets/admin.css')
+
+
+    base(href="/")
+    script(src='/javascripts/vendor/modernizr-2.8.3.min.js')
+
+  body(ng-app="OpposingFeedAdmin", ng-cloak)
+    //if lt IE 7
+      p.browsehappy You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+
+    block content
+
+
+
+    //- Facebook
+    div#fb-root
+    script.
+
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8&appId=1716003962060301";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+    //-libraries
+    script(src='/components/angular/angular.js')
+    script(src='/components/angular-animate/angular-animate.js')
+    script(src='/components/angular-messages/angular-messages.js')
+    script(src='/components/angular-material/angular-material.js')
+    script(src='/components/angular-aria/angular-aria.js')
+    script(src='/components/angular-scroll/angular-scroll.js')
+
+    script(src='/javascripts/apps/admin.js')
+
+    //- Services
+    script(src="/javascripts/services/ViewpointsService.js")
+    script(src="/javascripts/services/PartiesService.js")
+    script(src="/javascripts/services/StoriesService.js")
+    script(src="/javascripts/services/FeedService.js")
+
+    //- controllers
+    script(src="/javascripts/controllers/AdminController.js")
+
+    //- Directives
+    script(src="/javascripts/directives/fbDirective.js")
+
+    //- Custom Directives
+
+
+
+    script.
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+
+
+

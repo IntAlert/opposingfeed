@@ -19,4 +19,74 @@ router.get('/all', function(req, res, next) {
 
 });
 
+
+router.post('/create', function(req, res, next) {
+
+
+	// get the even twin feed
+	models.Viewpoint.create({
+		title: req.body.title
+	})
+	.then(function(viewpoint){
+		res.json({
+			viewpoint: viewpoint
+		})
+	})
+
+});
+
+router.post('/update/:ViewpointId', function(req, res, next) {
+
+	// get the story
+	models.Viewpoint.findOne({
+		where: {
+			id: req.params.ViewpointId
+		}
+	}).then(function(viewpoint){
+
+		// if no story, 404
+		if (!viewpoint) {
+			return res.json({
+				viewpoint: viewpoint
+			})
+		}
+
+		// update
+		viewpoint.title = req.body.title
+		
+		return viewpoint.save()
+
+	}).then(function(viewpoint){
+		return res.json({
+			viewpoint: viewpoint
+		})
+	})
+
+});
+
+router.post('/delete/:ViewpointId', function(req, res, next) {
+
+	models.Story.findOne({
+		where: {
+			id: req.params.ViewpointId
+		}
+	}).then(function(viewpoint){
+
+		if (!viewpoint) {
+			return res.json({
+				deleted: false
+			})
+		}
+
+		return viewpoint.destroy()
+
+	}).then(function(viewpoint){
+		return res.json({
+			deleted: true
+		})
+	})
+})
+
+
+
 module.exports = router;

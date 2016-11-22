@@ -1,0 +1,51 @@
+md-sidenav.md-sidenav-right(
+	md-component-id="right"
+	md-is-locked-open="false"
+	md-whiteframe="4"
+)
+
+	md-toolbar.md-theme-indigo
+		h1.md-toolbar-tools Story
+	
+
+	
+	md-content(layout-padding)
+		div(ng-form="storyForm")
+			md-input-container.md-block
+				label Viewpoint
+				input(
+					ng-disabled="true"
+					ng-model="selectedViewpoint.title"
+				)
+
+			md-input-container.md-block
+				label Story Title (used internally)
+				input(
+					required
+					ng-model="selectedStory.title"
+				)
+
+			md-input-container.md-block
+				label URL
+				input(
+					required
+					type="url"
+					ng-model="selectedStory.url"
+				)
+
+
+			md-checkbox(ng-model="selectedStory.agree") Agree with the viewpoint?
+
+			md-button.md-block.md-raised.md-warn(
+				ng-show="selectedStory.id"
+				ng-click="deleteSelectedStory()"
+			) Delete Story
+			
+			md-button.md-block.md-raised.md-accent(
+				ng-disabled="storyForm.$invalid"
+				ng-click="saveSelectedStory()"
+			) Save Story
+
+
+
+

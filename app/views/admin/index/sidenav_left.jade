@@ -1,0 +1,35 @@
+md-sidenav(
+	class="md-sidenav-left"
+	md-component-id="left"
+	md-is-locked-open="true"
+	md-whiteframe="4"
+)
+
+	md-toolbar.md-theme-indigo
+		h1.md-toolbar-tools Stories
+	
+
+	
+	md-content()
+
+		//- VIEWPOINTS
+		md-list(flex)
+			md-subheader.md-no-sticky Viewpoints
+			md-list-item.md-2-line(
+				ng-repeat="viewpoint in viewpoints.all"
+				ng-click="showViewpoint(viewpoint)"
+			)
+				div.md-list-item-text(layout="column")
+					h3 {{viewpoint.title}}
+					h4 {{viewpoint.Story.length}} stories
+
+		//- PARTIES
+		md-list(flex)
+			md-subheader.md-no-sticky Parties
+			md-list-item.md-2-line(
+				ng-repeat="party in parties.all"
+				ng-click="showParty(party)"
+			)
+				div.md-list-item-text(layout="column")
+					h3 {{party.name}}
+					h4 {{party.Story.length}} stories

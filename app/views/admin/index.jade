@@ -1,0 +1,16 @@
+extends ../layouts/admin
+
+block content
+	div(ng-controller="AdminController")
+
+		section(layout="row")
+			
+			include index/sidenav_left
+
+			md-content(flex)
+
+				div(ng-show="selectedViewpoint")
+					include index/viewpoint
+
+
+			include index/sidenav_right

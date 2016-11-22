@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 var api_viewpoints = require('./routes/api/viewpoints');
 var api_feed = require('./routes/api/feed');
 var api_parties = require('./routes/api/parties');
+var api_stories = require('./routes/api/stories');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/', routes);
 app.use('/api/feed', api_feed);
 app.use('/api/viewpoints', api_viewpoints);
 app.use('/api/parties', api_parties);
+app.use('/api/stories', api_stories);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

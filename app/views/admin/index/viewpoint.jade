@@ -1,0 +1,55 @@
+md-toolbar.md-accent.md-hue-1
+	h1.md-toolbar-tools Viewpoint
+
+md-content(flex)
+	div(
+		layout-padding
+		layout="row"
+	)
+		md-input-container(flex=80)
+			label Viewpoint Text
+			input(ng-model="selectedViewpoint.title")
+		
+		div(flex=20)
+			md-button.md-raised.md-primary Save
+
+	div.stories(layout="row")
+		div(flex=50)
+			md-toolbar.md-accent.md-hue-3
+				h1.md-toolbar-tools Agree
+
+			md-content
+				md-list(flex)
+
+					md-list-item.md-2-line(ng-click="showStoryCreate(true)")
+						div.md-list-item-text(layout="column")
+							h3 Create Agreeing Story
+
+					md-list-item.md-2-line(
+						ng-repeat="story in selectedViewpointStories.agree"
+						ng-click="showStory(story)"
+					)
+						div.md-list-item-text(layout="column")
+							h3 {{story.title}}
+							h4 {{story.url}}
+
+		md-divider
+
+		div(flex=50)
+			md-toolbar.md-accent.md-hue-2
+				h1.md-toolbar-tools Disagree 
+
+			md-content
+				md-list(flex)
+
+					md-list-item.md-2-line(ng-click="showStoryCreate(false)")
+						div.md-list-item-text(layout="column")
+							h3 Create Disagreeing Story
+
+					md-list-item.md-2-line(
+						ng-repeat="story in selectedViewpointStories.disagree"
+						ng-click="showStory(story)"
+					)
+						div.md-list-item-text(layout="column")
+							h3 {{story.title}}
+							h4 {{story.url}}

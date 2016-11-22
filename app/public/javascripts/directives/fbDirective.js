@@ -1,12 +1,12 @@
-(function () {
+(function (app) {
   'use strict';
   /**
   * @desc Direictive to embed facebook post
   * @example <fb-post-preview data-href="vm.postUrl"></fb-post-preview>
   */
-  angular
-    .module('OpposingFeedPublic')
-    .directive('fbPostPreview', fbPostPreview);
+  // angular
+    // .module('OpposingFeedPublic')
+    app.directive('fbPostPreview', fbPostPreview);
 
   /* @ngInject */
   function fbPostPreview($timeout) {
@@ -35,4 +35,4 @@
       });
     }
   }
-})();
+})(app);

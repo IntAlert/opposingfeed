@@ -8,7 +8,7 @@ app.factory('FeedService', function($http) {
 
 	  // convert responses to array
 	  var responsesArray = []
-	  for (var i = userData.responses.length - 1; i >= 0; i--) {
+	  for (i in userData.responses) {
 	  	responsesArray.push(userData.responses[i])
 	  }
 
