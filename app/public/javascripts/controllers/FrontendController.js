@@ -2,7 +2,7 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia, $tim
 
 	$scope.feed = {
 		embedOptions: {
-			width: $mdMedia('(min-width: 769px)') ? 600 : '100%',
+			width: $mdMedia('(min-width: 769px)') ? 600 : '90%',
 			height: $mdMedia('(min-width: 769px)') ? 300 : 360
 		},
 		stories: null

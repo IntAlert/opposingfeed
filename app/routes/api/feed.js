@@ -44,7 +44,6 @@ router.post('/generate', function(req, res, next) {
 
 	// create WHERE conditions as opposite to submitted responses
 	var orConditions = responses.map(function(response){
-		response.agree = !response.agree
 		return {
 			ViewpointId: response.id,
 			agree: !response.agree
