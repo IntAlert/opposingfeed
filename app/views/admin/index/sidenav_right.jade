@@ -5,18 +5,13 @@ md-sidenav.md-sidenav-right(
 )
 
 	md-toolbar.md-theme-indigo
-		h1.md-toolbar-tools Story
-	
-
+		h1.md-toolbar-tools 
+			span(ng-hide="selectedStory.id") Create Story
+			span(ng-show="selectedStory.id") Edit Story: {{selectedStory.title}}
 	
 	md-content(layout-padding)
+
 		div(ng-form="storyForm")
-			md-input-container.md-block
-				label Viewpoint
-				input(
-					ng-disabled="true"
-					ng-model="selectedViewpoint.title"
-				)
 
 			md-input-container.md-block
 				label Story Title (used internally)
@@ -26,15 +21,30 @@ md-sidenav.md-sidenav-right(
 				)
 
 			md-input-container.md-block
-				label URL
+				label Facebook Post URL
 				input(
 					required
 					type="url"
+					name="url"
 					ng-model="selectedStory.url"
+				)
+				h6 eg. https://www.facebook.com/5883973269/posts/10154749771023270
+
+			md-input-container.md-block
+				label Viewpoint (cannot change)
+				input(
+					ng-disabled="true"
+					ng-model="selectedViewpoint.title"
 				)
 
 
-			md-checkbox(ng-model="selectedStory.agree") Agree with the viewpoint?
+			md-checkbox(ng-model="selectedStory.agree") Story agrees with the viewpoint?
+
+			div(ng-if="storyForm.url.$valid")
+				fb-post-preview(
+					width="250"
+					story="selectedStory"
+				)
 
 			md-button.md-block.md-raised.md-warn(
 				ng-show="selectedStory.id"
@@ -46,6 +56,4 @@ md-sidenav.md-sidenav-right(
 				ng-click="saveSelectedStory()"
 			) Save Story
 
-
-
-
+			

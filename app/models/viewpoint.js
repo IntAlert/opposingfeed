@@ -1,7 +1,8 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Viewpoint = sequelize.define('Viewpoint', {
-    title: DataTypes.STRING
+    title: DataTypes.STRING,
+    sort_order: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {

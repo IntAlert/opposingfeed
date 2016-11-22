@@ -10,6 +10,9 @@ app.controller('AdminController', function ($scope, $document, $mdMedia, $timeou
 
 	$scope.selectedParty = null
 
+	$scope.testSelectedStory = {
+		url:"https://www.google.co.uk/"
+	}
 
 	$scope.showViewpoint = function(viewpoint){
 		$scope.selectedViewpoint = viewpoint
@@ -59,6 +62,13 @@ app.controller('AdminController', function ($scope, $document, $mdMedia, $timeou
 		$mdSidenav('right').open()
 	}
 
+	$scope.showViewpointCreate = function(agree) {
+		$scope.selectedViewpoint = {
+
+		}
+		$mdSidenav('right').close()
+	}
+
 	$scope.saveSelectedStory = function() {
 		if ($scope.selectedStory.hasOwnProperty('id')) {
 			var promise = StoriesService.update($scope.selectedStory)
@@ -72,12 +82,36 @@ app.controller('AdminController', function ($scope, $document, $mdMedia, $timeou
 		})
 	}
 
+	$scope.saveSelectedViewpoint = function() {
+		if ($scope.selectedViewpoint.hasOwnProperty('id')) {
+			var promise = ViewpointsService.update($scope.selectedViewpoint)
+		} else {
+			var promise = ViewpointsService.create($scope.selectedViewpoint)
+		}
+
+		promise.then(function(viewpoint){
+			$scope.showViewpoint(viewpoint)
+		})
+	}
+
 	$scope.deleteSelectedStory = function(){
 
 		if (confirm("Are you sure?")) {
 			StoriesService.delete($scope.selectedStory.id)
 			.then(function(){
 				$scope.showViewpoint($scope.selectedViewpoint)
+			})
+			$mdSidenav('right').close()	
+		}
+		
+	}
+
+	$scope.deleteSelectedViewpoint = function(){
+
+		if (confirm("Are you sure?")) {
+			ViewpointsService.delete($scope.selectedViewpoint.id)
+			.then(function(){
+				$scope.selectedViewpoint = null
 			})
 			$mdSidenav('right').close()	
 		}

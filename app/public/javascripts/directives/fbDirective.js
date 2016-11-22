@@ -33,6 +33,11 @@
           FB.XFBML.parse(element[0]);
         }
       });
+
+      scope.$watch('story', function(){
+          FB.XFBML.parse(element[0]);
+      }, true)
     }
   }
 })(app);
+

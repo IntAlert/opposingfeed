@@ -14,6 +14,37 @@ app.factory('ViewpointsService', function($http) {
 	  	})
   }
 
+
+  instance.create = function(viewpoint) {
+  var url = '/api/viewpoints/create';
+
+    return $http.post(url, viewpoint)
+      .then(function(res){
+        getAll()
+        return res.data.viewpoint
+      })
+  }
+
+  instance.update = function(viewpoint) {
+  var url = '/api/viewpoints/update/' + viewpoint.id;
+
+    return $http.post(url, viewpoint)
+      .then(function(res){
+        getAll()
+        return res.data.viewpoint
+      })
+  }
+
+  instance.delete = function(id) {
+  var url = '/api/viewpoints/delete/' + id;
+
+    return $http.post(url)
+      .then(function(res){
+        getAll()
+        return res.data
+      })
+  }
+
   // eager load
   getAll()
 

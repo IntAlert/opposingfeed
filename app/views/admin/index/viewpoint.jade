@@ -6,14 +6,25 @@ md-content(flex)
 		layout-padding
 		layout="row"
 	)
-		md-input-container(flex=80)
+		md-input-container(flex=70)
 			label Viewpoint Text
-			input(ng-model="selectedViewpoint.title")
-		
-		div(flex=20)
-			md-button.md-raised.md-primary Save
+			input(required, ng-model="selectedViewpoint.title")
 
-	div.stories(layout="row")
+		md-input-container(flex=10)
+			label Sort order
+			input(required, ng-model="selectedViewpoint.sort_order")
+		
+		div(flex=10)
+			md-button.md-raised.md-primary(
+				ng-click="saveSelectedViewpoint()"
+			) Save
+
+		div(flex=10)
+			md-button.md-raised.md-accent(
+				ng-click="deleteSelectedViewpoint()"
+			) Delete
+
+	div.stories(layout="row", ng-show="selectedViewpoint.id")
 		div(flex=50)
 			md-toolbar.md-accent.md-hue-3
 				h1.md-toolbar-tools Agree

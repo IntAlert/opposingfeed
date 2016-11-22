@@ -9,7 +9,8 @@ router.get('/all', function(req, res, next) {
 
 	// get the even twin feed
 	models.Viewpoint.findAll({
-		attributes: ['id','title']
+		order: [['sort_order', 'DESC']],
+		attributes: ['id','title', 'sort_order']
 	})
 		.then(function(viewpoints){
 			res.json({
@@ -25,7 +26,8 @@ router.post('/create', function(req, res, next) {
 
 	// get the even twin feed
 	models.Viewpoint.create({
-		title: req.body.title
+		title: req.body.title,
+		sort_order: req.body.sort_order
 	})
 	.then(function(viewpoint){
 		res.json({
@@ -53,6 +55,7 @@ router.post('/update/:ViewpointId', function(req, res, next) {
 
 		// update
 		viewpoint.title = req.body.title
+		viewpoint.sort_order = req.body.sort_order
 		
 		return viewpoint.save()
 
@@ -66,7 +69,7 @@ router.post('/update/:ViewpointId', function(req, res, next) {
 
 router.post('/delete/:ViewpointId', function(req, res, next) {
 
-	models.Story.findOne({
+	models.Viewpoint.findOne({
 		where: {
 			id: req.params.ViewpointId
 		}
