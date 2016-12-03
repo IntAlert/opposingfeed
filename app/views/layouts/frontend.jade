@@ -18,7 +18,53 @@ html(class='no-js')
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
 
-    
+
+    //-
+    //- 1. Default Site Layout
+    //- ======================
+    //- The below tags should be used in the generic document#head
+    //- N.B. Jade blocks should be used so other layouts can overwrite them
+    //-
+    //- og:title is the article's main title
+    meta(property='og:title', content='Yin to your Yang')
+
+    //- og:site_name is the name of the website the article sits on
+    meta(property='og:site_name', content='Yin to your Yang')
+
+
+    //-
+    //- 2. Article Layout
+    //- =================
+    //- The below tags should be used to overwrite
+    //- document#head blocks (as defined in Default Site Layout)
+    //-
+    //-
+    //- 2.1. OpenGraph Defaults
+    //- =======================
+    //-
+    //- og:type must be specified for graph data to be parsed
+    //- View all types at http://ogp.me/#types
+    meta(property='og:type', content='article')
+
+    //- og:site_name is the name of the website the article sits on
+    meta(property='og:site_name', content='Yin to your Yang')
+
+    //- og:title is the article's main title
+    meta(property='og:title', content='Yin to your Yang')
+
+    //- og:description should be a shortened description of the article
+    meta(property='og:description', content='On the web we live in a bubble closed off from political views different from our own. In terms of Facebook news, what is the yin to your yang?')
+
+    //- og:url is the caconical, permanent URL of the article
+    //- N.B. This URL should be forwarded using a 301 redirect header if the slug changes
+    meta(property='og:url', content='http://staging.cc7hmm6epu.eu-west-1.elasticbeanstalk.com/')
+
+    //- og:image is the article's main image (if applicable)
+    meta(property='og:image', content='staging.cc7hmm6epu.eu-west-1.elasticbeanstalk.com/images/yinyanglogo.png')
+
+    //- article:published_time should be defined as a UTC timestamp
+    meta(property='article:published_time', content='2016-12-03T05:59:00+01:00')
+
 
     link(rel='stylesheet', href='/stylesheets/normalize.css')
     link(rel='stylesheet', href='/components/angular-material/angular-material.min.css')
