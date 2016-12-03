@@ -49,7 +49,7 @@ app.controller('FrontendController', function ($scope, $document, $mdMedia, $tim
 				// for effect!
 				$scope.dataState.prompts.loaded = true;	
 				$scope.sections.viewpoints.show = true;
-			}, 2000)
+			}, 500)
 			
 		}
 	}, true)

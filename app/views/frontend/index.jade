@@ -7,10 +7,13 @@ block content
 
 		section.intro.full-height-panel(ng-show="sections.intro.show")
 			div.inner
-				h1 Bubble Breaker
+				h1 Yin to your Yang
+
+				div.logo
+					img(src="/images/yinyanglogo.png")
 				
-				p On the web, we live in a bubble <br>closed off from political views <br>different from our own. 
-				p What is your evil twin reading on Facebook?
+				p On the web we live in a bubble <br>closed off from political views <br>different from our own. 
+				p In terms of Facebook news, <strong>what is the yin to your yang?</strong>
 				
 				div.loading(ng-hide="dataState.prompts.loaded")
 					md-progress-circular.md-accent.md-hue-1(md-diameter="30")
@@ -58,7 +61,7 @@ block content
 				div.loading()
 					md-progress-circular.md-accent.md-hue-1(md-diameter="80")
 
-					p Loading your evil twin's feed
+					p Loading your yin and yang, yo
 					
 
 				//- //- md-button.md-raised.md-primary.md-block(
@@ -79,20 +82,18 @@ block content
 							story="story"
 						)
 
-						//- fb-post-preview(
-						//- 	data-href="{{story.url}}"
-						//- )
-
 		section.sign-up#sign-up(ng-show="sections.signUp.show")
 			div.inner(ng-if="sections.signUp.show")
 				h2 Want more?
 				
-				p Some blurb about the value of understanding other people's viewpoints
-				
-				p Once a week, we will keep you up to date with your opposite's point of view. You will receive a notification on Facebook with a link to the most recent stories. 
+				p Once a week, we will keep you up to date with your opposite's point of view.
+
+				p There are other ways access a range of viewpoints...
 
 				div.cta
-					md-button.md-raised.md-primary Sign in with Facebook
+					md-button.md-raised.md-primary(
+						href="http://eepurl.com/crF-h1"
+					) Find out more
 
 
 
