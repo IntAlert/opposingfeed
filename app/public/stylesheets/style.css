@@ -69,6 +69,7 @@ button span {
 }
 
 @media only screen and (min-width: 769px) {
+	.logo img {max-width: 25%;}
 	.feed-stories {
 		max-width: 600px;
 		margin:0 auto;
