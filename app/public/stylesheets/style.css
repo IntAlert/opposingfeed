@@ -48,7 +48,7 @@ section:nth-child(odd) {
 }
 
 
-.logo img {max-width: 75%; text-align: center;}
+.logo img {max-width: 50%; text-align: center;}
 
 * {
 	font-family: courier;

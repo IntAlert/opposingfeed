@@ -1,7 +1,7 @@
 'use strict';
 
 var FB = require('fb');
-FB.setAccessToken('1716003962060301|ZTBeWI4HlNQRLAP8ap1cVf4aNK0')
+FB.setAccessToken('214860878956757|iakWnMluOrhoMm6iphesIIpmgII')
 
 var getOtherPartyStories = function(parties, closestParty){
 
