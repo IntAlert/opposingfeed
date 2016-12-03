@@ -50,6 +50,24 @@ section:nth-child(odd) {
 
 .logo img {max-width: 75%; text-align: center;}
 
+* {
+	font-family: courier;
+}
+h1 {margin:0;}
+p {
+	
+    line-height: 1.4;
+    font-size: 110%;
+}
+
+button span {
+	font-weight: bold;
+	font-size: 120%;
+	padding-left: 1em;
+	padding-right: 1em;
+
+}
+
 @media only screen and (min-width: 769px) {
 	.feed-stories {
 		max-width: 600px;
